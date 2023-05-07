@@ -17,11 +17,6 @@ const initialState = {
   error: null,
 };
 
-const handleFulfilled = state => {
-  state.isLoading = false;
-  state.error = null;
-};
-
 const handlePending = state => {
   state.isLoading = true;
 };
@@ -31,17 +26,18 @@ const handleRejected = (state, action) => {
   state.error = action.payload;
 };
 
+const handleFulfilled = state => {
+  state.isLoading = false;
+  state.error = null;
+};
+
 const handleFulfilledGet = (state, action) => {
-  // state.isLoading = false;
-  // state.error = null;
   state.items = action.payload;
 };
 const handleFulfilledCreate = (state, action) => {
   state.items.push(action.payload);
 };
 const handleFulfilledDelete = (state, action) => {
-  // state.isLoading = false;
-  // state.error = null;
   const index = state.items.findIndex(
     contact => contact.id === action.payload.id
   );
@@ -61,15 +57,7 @@ const contactsSlice = createSlice({
       .addMatcher(getActions(PENDING), handlePending)
       .addMatcher(getActions(REJECTED), handleRejected)
       .addMatcher(getActions(FULFILLED), handleFulfilled);
-    // .addCase(fetchContacts.pending, handlePending)
-    // .addCase(fetchContacts.rejected, handleRejected)
-    // .addCase(addContact.pending, handlePending)
-    // .addCase(addContact.rejected, handleRejected)
-    // .addCase(deleteContact.pending, handlePending)
-    // .addCase(deleteContact.rejected, handleRejected);
   },
 });
-
-// Редюсер слайсу
 
 export const contactsReducer = contactsSlice.reducer;

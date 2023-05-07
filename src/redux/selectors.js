@@ -9,8 +9,6 @@ export const selectFilter = state => state.filter;
 export const selectVisibleContacts = createSelector(
   [selectContacts, selectFilter],
   (contacts, filter) => {
-    console.log(filter);
-    console.log(contacts);
     if (!filter) {
       return contacts;
     }
@@ -19,20 +17,3 @@ export const selectVisibleContacts = createSelector(
     );
   }
 );
-
-// export const selectVisibleContacts = state => {
-//   const contacts = selectContacts(state);
-//   const filter = selectFilter(state);
-//   return contacts.filter(contact =>
-//     contact.name.toLowerCase().includes(filter.toLowerCase())
-//   );
-
-// switch (statusFilter) {
-//   case statusFilters.active:
-//     return tasks.filter(task => !task.completed);
-//   case statusFilters.completed:
-//     return tasks.filter(task => task.completed);
-//   default:
-//     return tasks;
-// }
-// };
